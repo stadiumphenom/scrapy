@@ -53,6 +53,16 @@ Install with:
 
     pip install scrapy
 
+To run the Streamlit web scraping app:
+
+.. code:: bash
+
+   pip install -r docs/requirements.txt  # (optional, for docs)
+   pip install streamlit beautifulsoup4 lxml pandas requests
+   streamlit run app.py
+
+This will launch an interactive web interface for scraping websites using CSS selectors or XPath.
+
 And follow the documentation_ to learn how to use it.
 
 .. _documentation: https://docs.scrapy.org/en/latest/
