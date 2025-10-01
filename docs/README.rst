@@ -1,68 +1,55 @@
-:orphan:
+🕷️ General Purpose Web Scraping App
+===================================
 
-======================================
-Scrapy documentation quick start guide
-======================================
+This app allows you to extract content from any webpage using either CSS Selectors or XPath.
+It's built with Streamlit and supports downloading scraped data as CSV or JSON.
 
-This file provides a quick guide on how to compile the Scrapy documentation.
+Features
+--------
 
+- 🧭 Enter any URL to scrape
+- 🧪 Choose extraction method: **CSS Selector** or **XPath**
+- 📊 View results in a table
+- 📥 Download as CSV or JSON
+- 🌐 Deployable to Hugging Face Spaces or run locally
 
-Setup the environment
----------------------
-
-To compile the documentation you need Sphinx Python library. To install it
-and all its dependencies run the following command from this dir
-
-::
-
-    pip install -r requirements.txt
-
-
-Compile the documentation
--------------------------
-
-To compile the documentation (to classic HTML output) run the following command
-from this dir::
-
-    make html
-
-Documentation will be generated (in HTML format) inside the ``build/html`` dir.
-
-
-View the documentation
-----------------------
-
-To view the documentation run the following command::
-
-    make htmlview
-
-This command will fire up your default browser and open the main page of your
-(previously generated) HTML documentation.
-
-
-Start over
+Quickstart
 ----------
 
-To clean up all generated documentation files and start from scratch run::
+1. **Run Locally:**
 
-    make clean
+.. code-block:: bash
 
-Keep in mind that this command won't touch any documentation source files.
+    pip install -r requirements.txt
+    streamlit run app.py
 
+2. **Deploy to Hugging Face Spaces:**
 
-Recreating documentation on the fly
------------------------------------
+- Choose **Gradio** SDK
+- Select **Blank** template
+- Use **CPU Basic**
+- Upload:
+  - `app.py`
+  - `requirements.txt`
+  - `README.rst`
 
-There is a way to recreate the doc automatically when you make changes, you
-need to install watchdog (``pip install watchdog``) and then use::
+Dependencies
+------------
 
-    make watch
+- `streamlit`
+- `requests`
+- `beautifulsoup4`
+- `lxml`
+- `pandas`
 
-Alternative method using tox
-----------------------------
+Example
+-------
 
-To compile the documentation to HTML run the following command::
+.. image:: https://your-screenshot-link.png
+   :width: 600px
+   :alt: Scraping Example Screenshot
 
-    tox -e docs
+License
+-------
 
-Documentation will be generated (in HTML format) inside the ``.tox/docs/tmp/html`` dir.
+Apache-2.0
