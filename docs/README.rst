@@ -28,7 +28,4 @@ Quickstart
    :width: 600px
    :alt: Scraping Example Screenshot
 
-License
--------
-
 Apache-2.0
