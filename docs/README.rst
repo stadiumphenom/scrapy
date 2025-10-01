@@ -23,27 +23,6 @@ Quickstart
     pip install -r requirements.txt
     streamlit run app.py
 
-2. **Deploy to Hugging Face Spaces:**
-
-- Choose **Gradio** SDK
-- Select **Blank** template
-- Use **CPU Basic**
-- Upload:
-  - `app.py`
-  - `requirements.txt`
-  - `README.rst`
-
-Dependencies
-------------
-
-- `streamlit`
-- `requests`
-- `beautifulsoup4`
-- `lxml`
-- `pandas`
-
-Example
--------
 
 .. image:: https://your-screenshot-link.png
    :width: 600px
