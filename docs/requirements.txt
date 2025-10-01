@@ -8,3 +8,6 @@ beautifulsoup4
 lxml
 pandas
 requests
+scrapy
+w3lib
+defusedxml
