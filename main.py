@@ -5,7 +5,7 @@ import pandas as pd
 
 st.set_page_config(page_title="Web Scraper", page_icon="🕷️", layout="wide")
 
-st.title("🕷️ General Purpose Web Scraping App")
+st.title("🕷️ SOULSCRAPER")
 
 # --- Inputs ---
 url = st.text_input("Enter a URL to scrape:", "http://quotes.toscrape.com")
