@@ -1,7 +1,6 @@
 import streamlit as st
 import requests
-from bs4 import BeautifulSoup
-from lxml import html
+from lxml import html, etree
 import pandas as pd
 
 st.set_page_config(page_title="Web Scraper", page_icon="🕷️", layout="wide")
@@ -18,23 +17,32 @@ if st.button("Scrape"):
     st.write(f"Scraping: {url}")
 
     try:
-        response = requests.get(url, headers={"User-Agent": "Mozilla/5.0"})
+        response = requests.get(url, headers={"User-Agent": "Mozilla/5.0"}, timeout=10)
         response.raise_for_status()
     except Exception as e:
         st.error(f"Error fetching page: {e}")
     else:
         results = []
 
-        if method == "CSS Selector":
-            soup = BeautifulSoup(response.text, "html.parser")
-            elements = soup.select(query)
-            results = [el.get_text(strip=True) for el in elements]
-
-        elif method == "XPath":
+        try:
             tree = html.fromstring(response.content)
-            elements = tree.xpath(query)
-            # XPath can return text or elements
-            results = [el if isinstance(el, str) else el.text_content().strip() for el in elements]
+
+            if method == "CSS Selector":
+                try:
+                    elements = tree.cssselect(query)
+                    results = [el.text_content().strip() for el in elements]
+                except cssselect.SelectorSyntaxError as e:
+                    st.error(f"Invalid CSS selector: {e}")
+
+            elif method == "XPath":
+                try:
+                    elements = tree.xpath(query)
+                    results = [el if isinstance(el, str) else el.text_content().strip() for el in elements]
+                except etree.XPathEvalError as e:
+                    st.error(f"Invalid XPath expression: {e}")
+
+        except Exception as e:
+            st.error(f"Error parsing HTML: {e}")
 
         if results:
             df = pd.DataFrame({"Result": results})
@@ -45,4 +53,6 @@ if st.button("Scrape"):
             st.download_button("⬇️ Download CSV", df.to_csv(index=False), "results.csv")
             st.download_button("⬇️ Download JSON", df.to_json(orient="records"), "results.json")
         else:
-            st.warning("No results found. Try adjusting your selector.")
+            if not st.session_state.get("st_error_displayed", False):  # prevent duplicate warnings
+                st.warning("No results found. Try adjusting your selector.")
+                st.session_state["st_error_displayed"] = True
